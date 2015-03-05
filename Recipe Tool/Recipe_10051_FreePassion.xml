@@ -1,0 +1,1773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.3.40" creationDateTime="2014-11-22T03:13:17.8029505" />
+  <contentHeader name="Recipe_Tool" modificationDateTime="2014-11-22T03:13:17.8029505">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="Recipe_10051_FreePassion" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="execute">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Order">
+              <type>
+                <derived name="DUT_RECIPEORDER" />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="RecipeInfo">
+              <type>
+                <derived name="DUT_RECIPEOFFER" />
+              </type>
+            </variable>
+            <variable name="RecipeDone">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="InitDone">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="userparametersum">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="StepDone">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="i">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <actions>
+          <action name="Completed_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">RecipeDone := TRUE;
+StepDone := FALSE;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Init_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">RecipeDone := FALSE;
+
+// Initialisation of Recipe Parameters an name etc
+RecipeInfo.Name := 'Free Passion';
+RecipeInfo.Description := 'Sweet cocktail combining the sourness of Maracuja juice with the sweetness of grenadine syrup';
+RecipeInfo.Dummy := FALSE;
+RecipeInfo.RecipeID := 10051; 	// 
+Initdone := TRUE;
+
+//Parameter 0:
+
+	RecipeInfo.UserParameter[0].Dummy 		:= FALSE
+	RecipeInfo.UserParameter[0].Default		:= '200'
+	RecipeInfo.UserParameter[0].Description	:= 'Gives the total fluid amount in the glass'
+	RecipeInfo.UserParameter[0].MaxValue	:= 200
+	RecipeInfo.UserParameter[0].MinValue	:= 10
+	RecipeInfo.UserParameter[0].Name		:= 'Amount'
+	RecipeInfo.UserParameter[0].Unit		:= 'ml'
+	
+//Parameter 1:
+
+	RecipeInfo.UserParameter[1].Dummy 		:= FALSE
+	RecipeInfo.UserParameter[1].Default		:= '50'
+	RecipeInfo.UserParameter[1].Description	:= 'Maracuja Juice'
+	RecipeInfo.UserParameter[1].MaxValue	:= 100
+	RecipeInfo.UserParameter[1].MinValue	:= 1
+	RecipeInfo.UserParameter[1].Name		:= 'Maracuja Juice'
+	RecipeInfo.UserParameter[1].Unit		:= 'ml'
+	
+//Parameter 2:
+
+	RecipeInfo.UserParameter[2].Dummy 		:= FALSE
+	RecipeInfo.UserParameter[2].Default		:= '35'
+	RecipeInfo.UserParameter[2].Description	:= 'Orange Juice'
+	RecipeInfo.UserParameter[2].MaxValue	:= 100
+	RecipeInfo.UserParameter[2].MinValue	:= 1
+	RecipeInfo.UserParameter[2].Name		:= 'Orange Juice'
+	RecipeInfo.UserParameter[2].Unit		:= 'ml'
+
+//Parameter 3:
+
+	RecipeInfo.UserParameter[3].Dummy 		:= FALSE
+	RecipeInfo.UserParameter[3].Default		:= '15'
+	RecipeInfo.UserParameter[3].Description	:= 'Grenadine Syrup'
+	RecipeInfo.UserParameter[3].MaxValue	:= 50
+	RecipeInfo.UserParameter[3].MinValue	:= 1
+	RecipeInfo.UserParameter[3].Name		:= 'Grenadine Syrup'
+	RecipeInfo.UserParameter[3].Unit		:= 'ml'
+	
+	
+	
+//Parameter 1:
+(*
+	RecipeInfo.UserParameter[1].Dummy 		:= 
+	RecipeInfo.UserParameter[1].Default		:=
+	RecipeInfo.UserParameter[1].Description	:=
+	RecipeInfo.UserParameter[1].MaxValue	:=
+	RecipeInfo.UserParameter[1].MinValue	:=
+	RecipeInfo.UserParameter[1].Name		:=
+	RecipeInfo.UserParameter[1].Unit		:=
+*)
+//Parameter 2:
+
+(*
+	RecipeInfo.UserParameter[2].Dummy 		:= 
+	RecipeInfo.UserParameter[2].Default		:=
+	RecipeInfo.UserParameter[2].Description	:=
+	RecipeInfo.UserParameter[2].MaxValue	:=
+	RecipeInfo.UserParameter[2].MinValue	:=
+	RecipeInfo.UserParameter[2].Name		:=
+	RecipeInfo.UserParameter[2].Unit		:=
+*)
+
+//Parameter 3:
+
+(*
+	RecipeInfo.UserParameter[3].Dummy 		:= 
+	RecipeInfo.UserParameter[3].Default		:=
+	RecipeInfo.UserParameter[3].Description	:=
+	RecipeInfo.UserParameter[3].MaxValue	:=
+	RecipeInfo.UserParameter[3].MinValue	:=
+	RecipeInfo.UserParameter[3].Name		:=
+	RecipeInfo.UserParameter[3].Unit		:=
+*)
+
+//Parameter 4:
+
+(*
+	RecipeInfo.UserParameter[4].Dummy 		:= 
+	RecipeInfo.UserParameter[4].Default		:=
+	RecipeInfo.UserParameter[4].Description	:=
+	RecipeInfo.UserParameter[4].MaxValue	:=
+	RecipeInfo.UserParameter[4].MinValue	:=
+	RecipeInfo.UserParameter[4].Name		:=
+	RecipeInfo.UserParameter[4].Unit		:=
+*)
+
+
+//Parameter 5:
+
+(*
+	RecipeInfo.UserParameter[5].Dummy 		:= 
+	RecipeInfo.UserParameter[5].Default		:=
+	RecipeInfo.UserParameter[5].Description	:=
+	RecipeInfo.UserParameter[5].MaxValue	:=
+	RecipeInfo.UserParameter[5].MinValue	:=
+	RecipeInfo.UserParameter[5].Name		:=
+	RecipeInfo.UserParameter[5].Unit		:=
+*)</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Reserve0_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+RecipeDone := FALSE;
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1310;
+ExecuteSkill.SkillName	 	:= 'Reserve';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Production0_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+userparametersum := 0;
+FOR i := 1 TO UserParameterCnt DO
+	IF NOT order.UserParameter[i].Value = 0 THEN
+		userparametersum := userparametersum + order.UserParameter[i].Value;
+	END_IF
+END_FOR
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1113;
+ExecuteSkill.SkillName	 	:= 'Marajuca Juice';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'Quantity';
+//order.userParameter[0] = amount
+ExecuteSkill.Parameter[1].Value := order.UserParameter[0].Value * order.UserParameter[0].Value / userparametersum;//Summe aller Zutatenmengen;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="ProductionOrange_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1117;
+ExecuteSkill.SkillName	 	:= 'Orange';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'Quantity';
+//order.userParameter[0] = amount
+ExecuteSkill.Parameter[1].Value := order.UserParameter[0].Value * order.UserParameter[1].Value / userparametersum;//Summe aller Zutatenmengen;
+
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="ProductionGrenadine_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1111;
+ExecuteSkill.SkillName	 	:= 'Grenadine';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'Quantity';
+//order.userParameter[0] = amount
+ExecuteSkill.Parameter[1].Value := order.UserParameter[0].Value * order.UserParameter[2].Value / userparametersum; //Summe aller Zutatenmengen;
+
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="TransportCocktailModule_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1320;
+ExecuteSkill.SkillName	 	:= 'Transport';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[3].ID := 3;
+ExecuteSkill.Parameter[3].Name := 'Velocity';
+ExecuteSkill.Parameter[3].Value := 300;
+
+
+
+ExecuteSkill.Parameter[1].ID :=  1;
+ExecuteSkill.Parameter[1].Name := 'TargetPosition X';
+ExecuteSkill.Parameter[1].Value := 30 ;
+ExecuteSkill.Parameter[1].StringValue := '#DP#2#XPosition';
+
+
+
+ExecuteSkill.Parameter[2].ID := 2;
+ExecuteSkill.Parameter[2].Name := 'TargetPosition Z';
+ExecuteSkill.Parameter[2].Value := 10;// ZCookieModule - ZCookieModuleCalibration - 2* Cookiethickness + toppingthickness+ Preasureheight  ;
+
+
+
+(*
+ExecuteSkill.Parameter[4].ID := 4;
+ExecuteSkill.Parameter[4].Name := 'Acceleration';
+ExecuteSkill.Parameter[4].Value := 0 ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Block0_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1315;
+ExecuteSkill.SkillName	 	:= 'Block';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Unblock0_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1316;
+ExecuteSkill.SkillName	 	:= 'Unblock';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="TransportToOutput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1320;
+ExecuteSkill.SkillName	 	:= 'Transport';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[3].ID := 3;
+ExecuteSkill.Parameter[3].Name := 'Velocity';
+ExecuteSkill.Parameter[3].Value := 300;
+
+
+
+ExecuteSkill.Parameter[1].ID :=  1;
+ExecuteSkill.Parameter[1].Name := 'TargetPosition X';
+ExecuteSkill.Parameter[1].Value := 30 ;
+ExecuteSkill.Parameter[1].StringValue := '';
+
+
+
+ExecuteSkill.Parameter[2].ID := 2;
+ExecuteSkill.Parameter[2].Name := 'TargetPosition Z';
+ExecuteSkill.Parameter[2].Value := 90;// ZCookieModule - ZCookieModuleCalibration - 2* Cookiethickness + toppingthickness+ Preasureheight  ;
+
+
+
+(* ExecuteSkill.Parameter[4].ID := 4;
+ExecuteSkill.Parameter[4].Name := 'Acceleration';
+ExecuteSkill.Parameter[4].Value :=0 ;
+
+*)
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="CocktailOutput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1403;
+ExecuteSkill.SkillName	 	:= 'Output';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="UnblockAtOutput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1316;
+ExecuteSkill.SkillName	 	:= 'Unblock';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Unreserve0_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1311;
+ExecuteSkill.SkillName	 	:= 'Unreserve';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Val ue := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="TransportInput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1320;
+ExecuteSkill.SkillName	 	:= 'Transport';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[3].ID := 3;
+ExecuteSkill.Parameter[3].Name := 'Velocity';
+ExecuteSkill.Parameter[3].Value := 300;
+
+
+
+ExecuteSkill.Parameter[1].ID :=  1;
+ExecuteSkill.Parameter[1].Name := 'TargetPosition X';
+ExecuteSkill.Parameter[1].Value := 30 ;
+ExecuteSkill.Parameter[1].StringValue := '#DP#2#XPosition';
+
+
+
+ExecuteSkill.Parameter[2].ID := 2;
+ExecuteSkill.Parameter[2].Name := 'TargetPosition Z';
+ExecuteSkill.Parameter[2].Value := 10;// ZCookieModule - ZCookieModuleCalibration - 2* Cookiethickness + toppingthickness+ Preasureheight  ;
+
+
+
+(*
+ExecuteSkill.Parameter[4].ID := 4;
+ExecuteSkill.Parameter[4].Name := 'Acceleration';
+ExecuteSkill.Parameter[4].Value := 0 ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="BlockInput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1315;
+ExecuteSkill.SkillName	 	:= 'Block';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="Input_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1402;
+ExecuteSkill.SkillName	 	:= 'Input';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+          <action name="UnblockInput_active">
+            <body>
+              <ST>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">StepDone := FALSE;
+
+//Skill auswählen
+ExecuteSkill.SkillID 		:= 1316;
+ExecuteSkill.SkillName	 	:= 'Unblock';
+
+//Parameter setzen
+
+ExecuteSkill.Parameter[1].ID := 1;
+ExecuteSkill.Parameter[1].Name := 'TaskID';
+ExecuteSkill.Parameter[1].Value := Order.TaskID;
+
+
+(*
+ExecuteSkill.Parameter[2].ID := ;
+ExecuteSkill.Parameter[2].Name := '';
+ExecuteSkill.Parameter[2].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[3].ID := ;
+ExecuteSkill.Parameter[3].Name := '';
+ExecuteSkill.Parameter[3].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[4].ID := ;
+ExecuteSkill.Parameter[4].Name := '';
+ExecuteSkill.Parameter[4].Value := ;
+*)
+
+(*
+ExecuteSkill.Parameter[5].ID := ;
+ExecuteSkill.Parameter[5].Name := '';
+ExecuteSkill.Parameter[5].Value := ;
+*)
+
+
+
+ExecuteSkill();
+
+StepDone := ExecuteSkill.Done;</xhtml>
+              </ST>
+            </body>
+            <addData />
+          </action>
+        </actions>
+        <body>
+          <SFC>
+            <step localId="0" initialStep="true" name="Init">
+              <position x="0" y="0" />
+              <connectionPointIn />
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Init</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">TRUE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Init_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="1">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>execute</expression>
+            </inVariable>
+            <transition localId="2">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="0" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="1" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">execute</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="3" name="Reserve0">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="2" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Reserve0</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Reserve0_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="4">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="5">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="3" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="4" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="6" name="TransInput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="5" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">TransInput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">TransportInput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="7">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="8">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="6" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="7" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="9" name="BlockInput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="8" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">BlockInput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">BlockInput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="10">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="11">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="9" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="10" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="12" name="Input">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="11" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Input</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Input_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="13">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="14">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="12" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="13" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="15" name="UnblockInput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="14" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">UnblockInput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">UnblockInput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="16">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="17">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="15" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="16" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="18" name="TransPump">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="17" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">TransPump</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">TransportCocktailModule_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="19">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="20">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="18" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="19" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="21" name="BlockPump">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="20" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">BlockPump</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Block0_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="22">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="23">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="21" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="22" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="24" name="ProdMaracuja">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="23" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">ProdMaracuja</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Production0_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="25">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="26">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="24" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="25" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="27" name="ProdOrange">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="26" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">ProdOrange</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">ProductionOrange_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="28">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="29">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="27" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="28" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="30" name="ProdGrenadine">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="29" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">ProdGrenadine</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">ProductionGrenadine_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="31">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="32">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="30" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="31" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="33" name="UnblockPump">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="32" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">UnblockPump</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Unblock0_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="34">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="35">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="33" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="34" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="36" name="TransOutput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="35" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">TransOutput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">TransportToOutput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="37">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="38">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="36" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="37" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="39" name="BlockOutput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="38" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">BlockOutput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="40">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="41">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="39" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="40" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="42" name="CocktailOutput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="41" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">CocktailOutput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">CocktailOutput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="43">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="44">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="42" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="43" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="45" name="UnblockOutput">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="44" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">UnblockOutput</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">UnblockAtOutput_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="46">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="47">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="45" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="46" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="48" name="Unreserve0">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="47" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Unreserve0</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Unreserve0_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="49">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>StepDone</expression>
+            </inVariable>
+            <transition localId="50">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="48" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="49" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">StepDone</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <step localId="51" name="Completed">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="50" />
+              </connectionPointIn>
+              <connectionPointOut formalParameter="sfc" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Completed</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                    <attribute guid="6844a48e-46c2-4cc8-a185-a478f3b99cc0">FALSE</attribute>
+                    <attribute guid="700a583f-b4d4-43e4-8c14-629c7cd3bec8">Completed_active</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </step>
+            <inVariable localId="52">
+              <position x="0" y="0" />
+              <connectionPointOut />
+              <expression>NOT execute</expression>
+            </inVariable>
+            <transition localId="53">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="51" formalParameter="sfc" />
+              </connectionPointIn>
+              <condition>
+                <connectionPointIn>
+                  <connection refLocalId="52" />
+                </connectionPointIn>
+              </condition>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">NOT execute</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                    <attribute guid="bc882c11-1e91-4dd8-a6b8-2075724ed18b">0</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </transition>
+            <jumpStep localId="54" targetName="Init">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="53" />
+              </connectionPointIn>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/sfc/element" handleUnknown="implementation">
+                  <attributes xmlns="">
+                    <attribute guid="38391c6d-6d4a-42f8-8ee7-9f45e5adafa8">Init</attribute>
+                    <attribute guid="01580b27-6378-448b-8ecb-0e4b795b58d6">FALSE</attribute>
+                  </attributes>
+                </data>
+              </addData>
+            </jumpStep>
+          </SFC>
+        </body>
+        <addData />
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="Recipe_10051_FreePassion">
+          <Object Name="Completed_active" />
+          <Object Name="Init_active" />
+          <Object Name="Reserve0_active" />
+          <Object Name="Production0_active" />
+          <Object Name="ProductionOrange_active" />
+          <Object Name="ProductionGrenadine_active" />
+          <Object Name="TransportCocktailModule_active" />
+          <Object Name="Block0_active" />
+          <Object Name="Unblock0_active" />
+          <Object Name="TransportToOutput_active" />
+          <Object Name="CocktailOutput_active" />
+          <Object Name="UnblockAtOutput_active" />
+          <Object Name="Unreserve0_active" />
+          <Object Name="TransportInput_active" />
+          <Object Name="BlockInput_active" />
+          <Object Name="Input_active" />
+          <Object Name="UnblockInput_active" />
+        </Object>
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

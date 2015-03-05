@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="MAIN" Id="{366c503c-30b2-4391-8af7-3a10c6eae62c}">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	
+		
+	state	: INT := -40;	
+	i		: INT;
+	connectcounter	: INT;
+	TaskListPosition: INT := -1;
+	TaskListPositionString	: STRING[80];
+	Tempstring		: STRING[80];
+	//FB Instances
+	TranslateRecipe	: FB_ExecuteRecipe;
+	fbInitOffers	: FB_INIT_RECIPE;	
+	//OPC Instances:
+	//fbOPCUpdate		: FB_UpdateRecipeTool;
+	fbReadReset			: FB_ReadReset;
+	fbWriteReset		: FB_WriteReset;
+	fbOPCConnect		: FB_OPCServerConnect;
+	fbWriteOffers		: FB_WriteOfferlist;
+	fbReadQueue			: FB_ReadQueue;
+	fbWriteTask			: FB_WriteTask;
+	fbWriteQueue		: FB_WriteQueue;
+	fbDisconnect		: UA_Disconnect;
+	NamespaceIndex		: UINT;
+	ConnectionHdl		: DWORD;
+	TaskIdentifier		: STRING[80];
+	sizeofRecipfOFfer	: INT;
+	ClearOrder			: DUT_RECIPEORDER;
+	ToolTimeout			: TON;
+	Trigger				: R_TRIG;
+	TriggerState		: INT;
+	ResetReadTimer		: TON;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+CASE state OF
+	-40: //Initialate Recipe Offer List
+		fbInitOffers(Execute := TRUE);
+		ToolTimeout(IN := FALSE);
+		IF fbInitOffers.Done THEN
+			state := -30;
+		END_IF
+	-35: fbDisconnect(ConnectionHdl := ConnectionHdl,Timeout := T#4S, Execute := FALSE);
+		state := -34;
+	-34: fbDisconnect(ConnectionHdl := ConnectionHdl,Timeout := T#4s, Execute := TRUE);
+		IF nOT fbDisconnect.busy  THEN
+			state := -30;
+		END_IF
+		
+	
+	-30: fbOPCConnect(
+						ServerUrl:= 'opc.tcp://192.168.42.42:4840',//'opc.tcp://192.168.192.116:4840', 
+						NamespaceUri:= 'PLC1', 
+						ClientName:= 'RecipeTool', 
+						execute:= TRUE, 
+						ConnectHdl=> ConnectionHdl, 
+						Namespaceindex=> NamespaceIndex, 
+						busy=> , 
+						done=> , 
+						error=> );
+		IF fbOPCConnect.done THEN
+			state := -15;
+		END_IF
+					
+		
+	
+	
+	
+	-15: // OPC WRITE 
+		fbWriteOffers(
+						WriteIdentifier:= 'MI5.Recipe', 
+						NamespaceIndex:= NamespaceIndex, 
+						ConnectionHdl:= ConnectionHdl, 
+						execute:= TRUE, 
+						WriteData:= Offer, 
+						done=> , 
+						busy=> , 
+						error=> );
+		IF fbWriteOffers.done THEN
+			state := -10;
+		END_IF
+
+	
+	-10: //INIT DONE
+		TranslateRecipe.InitDone := TRUE;
+		state := 0;
+	
+	
+	
+	 0:		// Waiting for new Order
+	 	fbReadQueue(
+					ReadIdentifier:= 'MI5.Order[0]', 
+					NamespaceIndex:= NamespaceIndex, 
+					ConnectionHdl:= ConnectionHdl, 
+					execute:= TRUE, 
+					ReadData=> Queue, 
+					done=> , 
+					busy=> , 
+					error=> );
+		IF fbReadQueue.done THEN
+			state := 1;
+		END_IF
+		
+	1:	fbReadQueue(
+					ReadIdentifier:= 'MI5.Order[0]', 
+					NamespaceIndex:= NamespaceIndex, 
+					ConnectionHdl:= ConnectionHdl, 
+					execute:= TRUE, 
+					ReadData=> Queue, 
+					done=> , 
+					busy=> , 
+					error=> );
+		Trigger(CLK := fbReadQueue.done);
+		ToolTimeout(IN := NOT Trigger.Q);
+					
+		IF Queue.Pending THEN
+			state := 10;
+			TaskListPosition := TaskListPosition +1;
+				//Reset bei Overflow
+				IF TaskListPosition > 29 THEN
+					TaskListPosition := 0;
+				END_IF
+		END_IF		
+
+	 
+	10: state := 20;
+		
+		
+	20: //Translate corresponding offer to TempTask
+		TranslateRecipe(Order:= Queue, Done=> , Execute := TRUE);
+		
+		IF TranslateRecipe.Done THEN
+			state := 21;//21;
+			ExecuteSkill.TargetSkillNo := 0;
+		END_IF
+		
+		
+		//todo quatsch recipe IDs abfangen? return an HMI
+	21: TempTask.Name := Queue.Name;
+		TempTask.Dummy := FALSE;
+		TempTask.RecipeID := Queue.RecipeID;
+		TempTask.TaskID := Queue.TaskID;
+		TempTask.State := 1;
+		TempTask.Timestamp := 'mytimestamp';
+		state := 25;
+		
+			
+	25: //Parse write identifier
+		TaskListPositionString := INT_TO_STRING(TaskListPosition);
+		Tempstring := CONCAT(STR1:= 'MI5.ProductionList[', STR2:= TaskListPositionString );
+		
+		TaskIdentifier := CONCAT(STR1:= Tempstring, STR2:=']' );
+		state := 30;	
+	30: // Copy to local Production List
+		fbWriteTask(
+					WriteIdentifier:= TaskIdentifier, 
+					NamespaceIndex:= NamespaceIndex, 
+					ConnectionHdl:= ConnectionHdl, 
+					execute:= TRUE, 
+					WriteData:= TempTask, 
+					done=> , 
+					busy=> , 
+					error=> );
+		IF fbWriteTask.done THEN
+		//
+		state := 40;
+		END_IF		
+	
+
+	40:  // free Queue Slot
+		TempTask				:= EmptyTask;
+		
+		fbWriteQueue(
+			WriteIdentifier:= 'MI5.Order[0]', 
+			NamespaceIndex:= NamespaceIndex, 
+			ConnectionHdl:= ConnectionHdl, 
+			execute:= TRUE, 
+			WriteData:= , 
+			done=> , 
+			busy=> , 
+			error=> );
+		IF fbWriteQueue.done THEN
+		state := 0;
+		END_IF
+	
+	
+		
+		
+		
+	125: //Parse write identifier
+		TaskListPositionString := INT_TO_STRING(i);
+		Tempstring := CONCAT(STR1:= 'MI5.ProductionList[', STR2:= TaskListPositionString );
+		
+		TaskIdentifier := CONCAT(STR1:= Tempstring, STR2:=']' );
+		state := 130;	
+	130: // Copy to local Production List
+		fbWriteTask(
+					WriteIdentifier:= TaskIdentifier, 
+					NamespaceIndex:= NamespaceIndex, 
+					ConnectionHdl:= ConnectionHdl, 
+					execute:= TRUE, 
+					WriteData:= EmptyTask, 
+					done=> , 
+					busy=> , 
+					error=> );
+		IF fbWriteTask.done THEN
+			IF  i <TaskCnt  THEN
+				i := i +1;
+				state := 125;
+			ELSE
+				state := -30;
+				i := -1;
+			END_IF
+		
+		END_IF		
+		
+		
+END_CASE
+
+
+
+sizeofRecipfOFfer := SIZEOF(DUT_RecipeOffer);
+
+//TImerout:
+ToolTimeout(IN := TRUE, PT := T#20S);
+
+
+//stateänderungsüberprüfung
+IF NOT (state  = triggerstate) THEN
+	ToolTimeout(IN:= FALSE);
+END_IF
+triggerstate := state;
+
+
+IF ToolTimeout.Q THEN
+	connectcounter	:= connectcounter +1;
+	state := -35;
+	ToolTimeout(IN:= FALSE);
+	fbOPCConnect	(execute := FALSE);			
+	fbWriteOffers	(execute := FALSE);		
+	fbReadQueue		(execute := FALSE);			
+	fbWriteTask		(execute := FALSE);			
+	fbWriteQueue	(execute := FALSE);		
+	
+END_IF
+
+ResetReadTimer(IN := TRUE, PT := T#3S);
+IF ResetReadTimer.Q THEN
+	ResetReadTimer(IN := FALSE);
+	ResetReadTimer(IN := TRUE);
+	fbReadReset.execute := TRUE;
+END_IF
+fbReadReset(		ReadIdentifier:= 'MI5.ClearTaskList', 
+					NamespaceIndex:= NamespaceIndex, 
+					ConnectionHdl:= ConnectionHdl, 
+					execute:= , 
+					ReadData=> ClearTaskList, 
+					done=> , 
+					busy=> , 
+					error=> 
+				);
+
+					
+IF ClearTaskList THEN
+	i := 0;
+	
+	Tasklistposition := -1;
+	fbWriteReset(	WriteIdentifier := 'MI5.ClearTaskList',
+					NamespaceIndex := NamespaceIndex, 
+					ConnectionHdl := ConnectionHdl, 
+					WriteData := FALSE,
+					Execute		:= TRUE);
+	IF fbWriteReset.done THEN
+		state := 125;
+	END_IF
+	
+END_IF]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

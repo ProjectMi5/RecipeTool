@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_UpdateRecipeTool" Id="{eae5cae4-786d-4a25-8b15-eb4f87792430}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_UpdateRecipeTool
+VAR_INPUT
+	ServerUrl		: STRING[80];
+	NamespaceUri	: STRING[80];
+	ClientName		: STRING[80];
+	IdentifierInput	: STRING[80];
+	IdentifierOutput: STRING[80];
+	Execute			: BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	RecipeToolRead		: ARRAY [1..OrderCnt] OF DUT_RECIPEORDER;
+	done				: BOOL := FALSE;
+	connected			: BOOL := FALSE;
+	readestablished		: BOOL := FALSE;
+	writedone			: BOOL := FALSE;
+END_VAR
+VAR
+	fbConnect		: FB_OPCServerConnect;
+	fbRead			: FB_ReadRecipeTool;
+	fbWrite			: FB_WriteRecipeTool;
+	NamespaceIndex	: UINT;
+	ConnectionHdl	: DWORD;
+	state: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute THEN	
+
+CASE state OF
+	
+	0: state := 1;
+	1: fbConnect(
+			ServerUrl:= ServerUrl, 
+			NamespaceUri:= NamespaceUri , 
+			ClientName:= ClientName , 
+			execute:= TRUE, 
+			ConnectHdl=> ConnectionHdl , 
+			Namespaceindex=> NamespaceIndex , 
+			busy=> , 
+			done=> , 
+			error=> );
+		IF fbConnect.done THEN
+		state := 2;
+		END_IF
+		
+		
+		
+	
+	2: fbRead(
+			IdentifierInput:= IdentifierInput, 
+			NamespaceIndex:= NamespaceIndex, 
+			ConnectionHdl:= ConnectionHdl, 
+			execute:= TRUE, 
+			OrderInput=> OrderInput, 
+			done=> done, 
+			busy=> , 
+			error=> );
+		IF fbRead.done THEN
+			writedone := TRUE;
+		END_IF
+		//state := 3;
+
+			
+	(*3:fbWrite(
+		IdentifierOutput:= IdentifierOutput, 
+		NamespaceIndex:= NamespaceIndex, 
+		ConnectionHdl:= ConnectionHdl, 
+		execute:= TRUE, 
+		ModuleOutput:= ModuleOutput, 
+		done=> , 
+		busy=> , 
+		error=> );
+		
+		state := 2;*)
+		
+		
+	
+		
+		
+END_CASE
+
+END_IF]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

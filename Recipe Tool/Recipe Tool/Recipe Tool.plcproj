@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6d07615f-55e9-4240-88d7-066057a8f136}</ProjectGuid>
+    <Name>Recipe_Tool</Name>
+    <ProgramVersion>3.1.0.8</ProgramVersion>
+    <Application>{74cf061b-5ac1-4ebe-94e4-6a18edbfb890}</Application>
+    <TypeSystem>{ad5968d8-863f-4a81-9e65-01d5529e743d}</TypeSystem>
+    <Implicit_Task_Info>{255532c2-ce59-4408-864d-7ee1abb4a47c}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{56f279d2-b72a-46e1-ad74-3e731af74b04}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{374aa6f8-4cb6-49c0-a8d8-b5a5788ddb86}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{e147a036-431a-4fc9-b063-28426b9f2f1e}</LibraryReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DUTs\DUTs\Production List\DUT_SKILL.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\Production List\DUT_TASK.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\Production List\DUT_TASKSTATE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\Queue\DUT_RECIPEORDER.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\Queue\DUT_RECIPE_USERPARAMETERINPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\RecipeOffer\DUT_RECIPEOFFER.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUTs\RecipeOffer\DUT_RECIPE_USERPARAMETEROUTPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_BASE\DUT_PARAMETER_INPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_BASE\DUT_PARAMETER_OUTPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_MODE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_PARAMETER.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_RecipeCommand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_RecToolRECIPEOFFER.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_MODULE_INTERFACE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_MODULE_INTERFACE_INPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_MODULE_INTERFACE_OUTPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_PARAMETERARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_PARAMETERINPUTARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_PARAMETEROUTPUTARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILL.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILLARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILLINPUTARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILLOUTPUTARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILL_INPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_SKILL_OUTPUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_STATEVALUEARRAY.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_SERVER\DUT_SERVER_TASK.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DUT_STATEVALUES.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\GVL.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\I_O_GVL.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\OPCConstants.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_AddSkill.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_ExecuteRecipe.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_INIT_RECIPE.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_OPCServerConnect.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_ReadReset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_ReadRecipeTool.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_ReadQueue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_UpdateRecipeTool.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_WriteOfferlist.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_WriteReset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_WriteTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OPC\FB_WriteQueue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10000_BlankRecipe.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10001_OneRound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10019_DoubleCookieSimu.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10018_TripleCookiemitTopping.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10030_HandModule.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10050_PumpTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10010_transportreserve.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10011_Skill1337.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10012_Skill1337_1338_1339.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10015_eineCookiebitte.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10013_nSchichten.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10014_nSchichten4skills.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10016_CookiemitTopping.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10017_DoubleCookiemitTopping.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10051_FreePassion.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10054_FreePassion_special.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10052_Orangenschorle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10053_911Targa.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10054_Sixteen.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10055_Summerday.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10056_ArcturianSunrise.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10057_GreenFive.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10059_Pina_Batida_Lemon.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10058_RedOne.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_10100_Initialisation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_11015_DoubleChocoCookie.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Recipes\Recipe_11020_TequilaSunrise.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DUTs" />
+    <Folder Include="DUTs\DUTs\" />
+    <Folder Include="DUTs\DUTs\Production List\" />
+    <Folder Include="DUTs\DUTs\Queue\" />
+    <Folder Include="DUTs\DUTs\RecipeOffer\" />
+    <Folder Include="DUTs\DUT_BASE\" />
+    <Folder Include="DUTs\DUT_SERVER\" />
+    <Folder Include="GVLs" />
+    <Folder Include="POUs\RecipeHandling" />
+    <Folder Include="POUs\Recipes" />
+    <Folder Include="POUs\OPC" />
+    <Folder Include="VISUs" />
+    <Folder Include="POUs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="RecipeManagement">
+      <DefaultResolution>Recipe Management, 3.4.1.0 (System)</DefaultResolution>
+      <Namespace>Recipe_Management</Namespace>
+      <PublishSymbolsInContainer>True</PublishSymbolsInContainer>
+      <SystemLibrary>True</SystemLibrary>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Interfaces">
+      <DefaultResolution>Tc3_Interfaces, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Interfaces</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Recipe Tool.tmc">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="Tc3_PLCopen_OpcUa,3.1.1.0,Beckhoff Automation GmbH">
+      <Namespace>Tc3_PLCopen_OpcUa</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="UML Statechart Types,4.0.0.0,3S - Smart Software Solutions GmbH">
+      <Namespace>UML_SC</Namespace>
+      <PublishSymbolsInContainer>True</PublishSymbolsInContainer>
+      <SystemLibrary>True</SystemLibrary>
+    </LibraryReference>
+  </ItemGroup>
+  <ProjectExtensions />
+</Project>

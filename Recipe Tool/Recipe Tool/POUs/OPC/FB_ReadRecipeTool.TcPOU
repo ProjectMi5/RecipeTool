@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_ReadRecipeTool" Id="{3498e745-b991-4486-9cd1-b91db73fda3f}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReadRecipeTool
+VAR_INPUT
+	ReadIdentifier: STRING[80];
+	NamespaceIndex: UINT;
+	ConnectionHdl: DWORD;
+	execute: BOOL;
+END_VAR
+VAR_OUTPUT
+	OrderRead		: ARRAY [1..OrderCnt] OF DUT_RECIPEORDER;
+	done: BOOL;
+	busy: BOOL;
+	error: BOOL;
+END_VAR
+VAR
+		/// FBs
+	fbNodeGetHandle: UA_NodeGetHandle;
+	fbReadVariable: UA_Read;
+	///Variables
+	pOrderInput		: POINTER TO ARRAY [1..OrderCnt] OF DUT_RECIPEORDER;
+	
+	VariableSize: UDINT;
+	NodeHdl: DWORD;
+	cbDataR: UDINT;
+	state: INT := -1;
+	SessionNodeID: ST_UANodeID;
+	Timeout: TIME := DEFAULT_ADS_TIMEOUT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF execute THEN 
+	CASE state OF
+		
+		-1:	SessionNodeID.nNamespaceIndex    			:= Namespaceindex;
+			SessionNodeID.eIdentifierType				:= 1;
+			SessionNodeID.sIdentifier					:= ReadIdentifier;
+			VariableSize 								:= SIZEOF (OrderInput);
+			pOrderInput								:= ADR(OrderInput);
+			
+			
+			
+
+			busy := TRUE;
+			done := FALSE;
+			state:=0;
+
+		0: fbNodeGetHandle(
+			Execute:=FALSE,
+			ConnectionHdl:=ConnectionHdl,
+			NodeID:=SessionNodeID,
+			Timeout:=Timeout,
+			NodeHdl=>NodeHdl,
+			Done=>,
+			Busy=>busy,
+			Error=>,
+			ErrorID=>,);
+			state:=1;
+			
+		1:fbNodeGetHandle(
+			Execute:=TRUE,
+			ConnectionHdl:=ConnectionHdl,
+			NodeID:=SessionNodeID,
+			Timeout:=Timeout,
+			NodeHdl=>NodeHdl,
+			Done=>,
+			Busy=>busy,
+			Error=>,
+			ErrorID=>,);
+			IF fbNodeGetHandle.Done THEN
+			state := 2;
+			END_IF
+			
+		2:
+			fbReadVariable(
+				Execute:= FALSE, 
+				ConnectionHdl:= ConnectionHdl, 
+				NodeHdl:= NodeHdl, 
+				stNodeAddInfo:= , 
+				pVariable:= pOrderInput, 
+				cbData:= VariableSize, 
+				Timeout:= DEFAULT_ADS_TIMEOUT, 
+				Done=> , 
+				Busy=> , 
+				Error=> , 
+				ErrorID=> , 
+				cbData_R=>cbDataR );
+				state := 3;
+				error :=FALSE;
+				
+		3:		fbReadVariable(
+				Execute:= TRUE, 
+				ConnectionHdl:= ConnectionHdl, 
+				NodeHdl:= NodeHdl, 
+				stNodeAddInfo:=, 
+				pVariable:= pOrderInput, 
+				cbData:= VariableSize, 
+				Timeout:= DEFAULT_ADS_TIMEOUT, 
+				Done=>, 
+				Busy=>, 
+				Error=>error, 
+				ErrorID=>, 
+				cbData_R=>cbDataR );
+				IF fbReadVariable.Done THEN
+					state		:= 2;
+					execute		:= FALSE;
+					done		:= TRUE;
+					busy		:= FALSE;
+				END_IF		
+		
+	END_CASE
+ 
+END_IF]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

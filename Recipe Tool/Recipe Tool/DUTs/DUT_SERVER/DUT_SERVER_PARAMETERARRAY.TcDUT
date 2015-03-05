@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_SERVER_PARAMETERARRAY" Id="{96e6a0f3-75ae-4135-9a3e-38bb677abd36}">
+    <Declaration><![CDATA[TYPE DUT_SERVER_PARAMETERARRAY :
+STRUCT
+	Parameter0 : DUT_PARAMETER;
+	Parameter1 : DUT_PARAMETER;
+	Parameter2 : DUT_PARAMETER;
+	Parameter3 : DUT_PARAMETER;
+	Parameter4 : DUT_PARAMETER;
+	Parameter5 : DUT_PARAMETER;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

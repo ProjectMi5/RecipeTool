@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <GVL Name="I_O_GVL" Id="{4dfb039f-3452-4ac3-9be1-1665c3d246ae}">
+    <Declaration><![CDATA[VAR_GLOBAL
+// Inputs:
+
+Queue	: DUT_RECIPEORDER;
+
+//Outputs:
+
+Offer	: ARRAY [0..OfferCnt] OF DUT_RECIPEOFFER;
+
+// ProductionList
+
+Task	: ARRAY [0..TaskCnt] OF DUT_TASK;
+END_VAR]]></Declaration>
+    <ObjectProperties />
+  </GVL>
+</TcPlcObject>

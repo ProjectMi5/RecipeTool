@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_TASKSTATE" Id="{4da2916b-dadb-446a-8890-34cd761b803d}">
+    <Declaration><![CDATA[TYPE DUT_TASKSTATE :
+(
+	Unassigned := 0,
+	///Assigned := 1,
+	WaitingForSkillReady := 1,
+	InProgress := 2,
+	Done := 3,
+	Aborted := 4,
+	Error := 5
+);
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

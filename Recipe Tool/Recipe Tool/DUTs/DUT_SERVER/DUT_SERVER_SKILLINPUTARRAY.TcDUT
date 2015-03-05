@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_SERVER_SKILLINPUTARRAY" Id="{82fccc20-22f2-4328-a8d3-9a65c5c6aee2}">
+    <Declaration><![CDATA[TYPE DUT_SERVER_SKILLINPUTARRAY :
+STRUCT
+	SkillInput0 : DUT_SERVER_SKILL_INPUT;
+	SkillInput1 : DUT_SERVER_SKILL_INPUT;
+	SkillInput2 : DUT_SERVER_SKILL_INPUT;
+	SkillInput3 : DUT_SERVER_SKILL_INPUT;
+	SkillInput4 : DUT_SERVER_SKILL_INPUT;
+	SkillInput5 : DUT_SERVER_SKILL_INPUT;
+	SkillInput6 : DUT_SERVER_SKILL_INPUT;
+	SkillInput7 : DUT_SERVER_SKILL_INPUT;
+	SkillInput8 : DUT_SERVER_SKILL_INPUT;
+	SkillInput9 : DUT_SERVER_SKILL_INPUT;
+	SkillInput10 : DUT_SERVER_SKILL_INPUT;
+	SkillInput11 : DUT_SERVER_SKILL_INPUT;
+	SkillInput12 : DUT_SERVER_SKILL_INPUT;
+	SkillInput13 : DUT_SERVER_SKILL_INPUT;
+	SkillInput14 : DUT_SERVER_SKILL_INPUT;
+	SkillInput15 : DUT_SERVER_SKILL_INPUT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

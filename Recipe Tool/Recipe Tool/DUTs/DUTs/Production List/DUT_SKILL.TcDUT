@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_SKILL" Id="{faccca24-d08f-4521-8018-2d4af271ccd9}">
+    <Declaration><![CDATA[///  Skill variables inside DUT_TASK
+TYPE DUT_SKILL :
+STRUCT
+	///Name assigned for the process tool
+	AssignedModuleName: STRING(80);
+	///ID assigned for the process tool
+	AssignedModuleID: UINT;
+	///Position assigned for the process tool
+	AssignedModulePosition: LREAL;
+	///Free to use = TRUE, busy to use =FALSE
+	Dummy: BOOL := TRUE;
+	///Identification number of the skill
+	ID: UINT;
+	///Name of the skill
+	Name: STRING(80);
+	///Range of parameters
+	Parameter: ARRAY[0..ParameterCnt] OF DUT_PARAMETER;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

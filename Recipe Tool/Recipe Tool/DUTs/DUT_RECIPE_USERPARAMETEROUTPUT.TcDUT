@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_RECIPE_USERPARAMETEROUTPUT" Id="{5051e0b0-dfda-4b1b-827d-9a43f53112ed}">
+    <Declaration><![CDATA[TYPE DUT_RECIPE_USERPARAMETEROUTPUT :
+STRUCT
+	Dummy:			BOOL := TRUE;
+	Name:			STRING[80];
+	Description:	STRING[80];
+	Unit:			STRING[80];
+	MinValue:		LREAL;
+	MaxValue:		LREAL;
+	Default:		LREAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

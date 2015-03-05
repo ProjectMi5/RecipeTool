@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="Order" Id="{64b0fc9c-ebd2-4b68-97e3-055e18a37268}">
+    <Declaration><![CDATA[FUNCTION_BLOCK Order
+VAR_INPUT
+	recipenr	: INT;
+	taskID		: INT;
+	name		: STRING;
+	execute		: BOOL;
+END_VAR
+VAR_OUTPUT
+	done		: BOOL;
+END_VAR
+VAR
+	ChocoCookie			: Recipe_10014_chocoCookie;
+	DoubleChocoCookie	: Recipe_10015_DoubleChocoCookie;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF execute THEN
+	
+		// ADD RECIPE SKILLS:
+		CASE recipenr OF
+			
+			10014: ChocoCookie(TaskID:=taskID, execute := TRUE, RecipeDone=> done);
+			10015: DoubleChocoCookie(TaskID:=taskID, execute := TRUE, Recipedone => done);
+			ELSE done := TRUE;//Rezeptnr nicht bekannt
+		END_CASE;
+		// ADD GENERAL DATA:
+		
+		MyTask.TaskID := taskID;
+		MyTask.RecipeID := recipenr;
+		MyTask.Name		:= name;
+		
+		
+		
+		
+	IF done THEN
+		execute := FALSE;
+	END_IF
+	
+END_IF;
+ ]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

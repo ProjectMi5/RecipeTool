@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_TASK" Id="{ffe4de1a-c600-466a-9e5c-30a1b6df1ea5}">
+    <Declaration><![CDATA[TYPE DUT_TASK :
+STRUCT
+	///Name of the Task
+	Name: STRING[80];
+	///Free to use = TRUE, busy to use =FALSE
+	Dummy: BOOL := TRUE;
+	///Identification number of the Task
+	TaskID: INT;
+	///Identification number of the Recipe
+	RecipeID: INT;
+	///Range of Skill in the TASK
+	Skill: ARRAY[0..TaskSkillCnt] OF DUT_SKILL;
+	///When occurs the action
+	Timestamp: STRING[80];
+	///State of the TASK e.g (unassigned, assigned, waitingForSkillReady, inProgress, done, aborted, error)
+	State: DUT_TASKSTATE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

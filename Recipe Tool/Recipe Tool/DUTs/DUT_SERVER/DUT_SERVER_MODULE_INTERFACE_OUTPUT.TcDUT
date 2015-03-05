@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_SERVER_MODULE_INTERFACE_OUTPUT" Id="{b06a3051-96b9-4ecf-9f32-41b1d317f5b8}">
+    <Declaration><![CDATA[TYPE DUT_SERVER_MODULE_INTERFACE_OUTPUT :
+STRUCT
+	///Free to use = TRUE, busy to use =FALSE
+	Dummy: BOOL := TRUE;
+	///Individual name of the module
+	Name: STRING[80];
+	///Identification number of module
+	ID: UINT;
+	///IP address
+	IP: STRING[80];
+	///Show if the module is in Standby or not
+	Idle: BOOL;
+	///Show if the module is connected
+	Connected: BOOL;
+	///Feedback with conection test input
+	ConnectionTestOutput: BOOL;
+	///Show if the system has error when=TRUE
+	Error: BOOL;
+	///Identification number of the error
+	ErrorID: UINT;
+	///Description of the error
+	ErrorDescription: STRING[80];
+	///Description of the current task
+	CurrentTaskDescription: STRING[80];
+	///Position of the sensor
+	PositionSensor: BOOL;
+	///Range of OUTPUT skills
+	SkillOutput: DUT_SERVER_SKILLOUTPUTARRAY;
+	///Range of state values
+	StateValue: DUT_SERVER_STATEVALUEARRAY;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

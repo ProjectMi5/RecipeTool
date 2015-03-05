@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_RecipeCommand" Id="{52c460f9-1dcf-4ec9-a724-38e053a613ed}">
+    <Declaration><![CDATA[TYPE DUT_RecipeCommand :
+STRUCT
+	SkillID: INT;
+	SkillName: STRING(80);
+	Quantity: LREAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

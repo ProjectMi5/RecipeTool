@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_AddSkill" Id="{6a565d77-b1fe-44f7-bb36-573adab990cf}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AddSkill
+VAR_INPUT
+	SkillID 		: UINT;
+	SkillName		: STRING[80];
+    Parameter 		: ARRAY [0..ParameterCnt] OF DUT_PARAMETER;
+	EmptyParameter	: ARRAY [0..ParameterCnt] OF DUT_PARAMETER;
+	TargetSkillNo	: INT := 0;
+	
+END_VAR
+VAR_OUTPUT
+	Done			: BOOL;
+END_VAR
+VAR
+	
+	
+	i: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[DONE := FALSE;
+
+	
+	
+	
+	TempTask.Skill[TargetSkillNo].Dummy 	:= FALSE;
+	TempTask.Skill[TargetSkillNo].ID 		:= SkillID;
+	TempTask.Skill[TargetSkillNo].Name	:= SkillName;
+	
+	FOR i := 0 TO ParameterCnt DO
+		IF NOT (Parameter[i].ID = 0) THEN
+			TempTask.Skill[TargetSkillNo].Parameter[i].Dummy 	:= FALSE;
+			TempTask.Skill[TargetSkillNo].Parameter[i].Value	:= Parameter[i].Value;
+			TempTask.Skill[TargetSkillNo].Parameter[i].StringValue	:= Parameter[i].StringValue;
+			TempTask.Skill[TargetSkillNo].Parameter[i].ID 	:= Parameter[i].ID;
+			TempTask.Skill[TargetSkillNo].Parameter[i].Name	:= Parameter[i].Name;
+			
+		END_IF
+	END_FOR
+	
+	//Mitzählen, welche stelle der Taskskillliste gerade befüllt wird
+	TargetSkillNo := TargetSkillNo +1;
+	Parameter := EmptyParameter;
+Done := TRUE;
+	]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

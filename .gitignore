@@ -1,0 +1,9 @@
+*.bak
+*/_Boot/*
+*/*/_Libraries/*
+*.suo
+*.tclrs
+*.compileinfo
+*.bootinfo
+*.tmc
+*.tpy

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <GVL Name="GVL" Id="{90dc571b-64f3-4dd7-a492-2085b7fa6544}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	ExecuteSkill	: FB_AddSkill;
+	TempTask		: DUT_TASK;
+	EmptyTask		: DUT_TASK;
+	EmptyQueue		: DUT_RECIPEORDER;
+	
+	ZCremeModuleCalibration		: LREAL := 0;	
+	ZCremeModule				: LREAL	:= 101;
+	
+	
+	ZCocktailModuleCalibration 	: LREAL := 0;
+	ZCocktailModule				: LREAL := 20;
+	
+	ZCookieModuleCalibration	: LREAL := 0;
+	ZCookieModule				: LREAL := 90.0;
+	
+	ZInputOutput				: LREAL := 109;
+	
+	
+	
+	cookiethickness				: LREAL := 5.0;
+	toppingthickness			: LREAL := 1.0;
+	
+	preasureheight				: LREAL := 30.0;
+	ClearTaskList				: BOOL;	
+END_VAR]]></Declaration>
+    <ObjectProperties />
+  </GVL>
+</TcPlcObject>

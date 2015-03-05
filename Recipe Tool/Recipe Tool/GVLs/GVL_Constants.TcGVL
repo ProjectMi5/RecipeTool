@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <GVL Name="GVL_Constants" Id="{249a36b5-8dc9-4536-81e7-0cabac851b6d}">
+    <Declaration><![CDATA[VAR_GLOBAL CONSTANT
+	UserParameterCnt	: INT := 5;
+	SkillParameterCnt	: INT := 5;
+	TaskSkillCnt		: INT := 30;
+	RecipeCnt			: INT := 30;	//Number of offered recipes
+	
+END_VAR]]></Declaration>
+    <ObjectProperties />
+  </GVL>
+</TcPlcObject>

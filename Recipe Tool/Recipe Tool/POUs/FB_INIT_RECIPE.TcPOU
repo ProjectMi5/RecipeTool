@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_INIT_RECIPE" Id="{94b04bbb-bd23-4917-b23c-5bfa06b6adeb}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_INIT_RECIPE
+VAR_INPUT
+	Execute	: 	BOOL;
+END_VAR
+VAR_OUTPUT
+	Done	: BOOL;
+	Busy	: BOOL;
+	Error	: BOOL;
+END_VAR
+VAR
+	i	: INT := 10000;
+	OfferCounter	: INT;
+	InitOrder		: DUT_RECIPEORDER;
+	fbExecuteRecipe	: FB_ExecuteRecipe;
+	state: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute THEN
+	Done := FALSE;
+	CASE state OF
+		
+
+		0: 
+			fbExecuteRecipe.Execute := TRUE;
+			InitOrder.RecipeID := i;
+			state := 1;
+			
+		1:	
+			fbExecuteRecipe(Order:= InitOrder);
+			IF fbExecuteRecipe.Done THEN
+				IF fbExecuteRecipe.NotAvailable THEN
+				state := 50;
+				ELSE
+				Offer[OfferCounter]:=fbExecuteRecipe.RecipeInfo;
+				OfferCounter := OfferCounter +1;
+				state := 50;
+				END_IF
+			END_IF	
+			
+			
+			
+			
+		50: IF i< 10100 THEN
+				i := i+1;
+				state :=0;
+			ELSE
+				busy 	:= FALSE;
+				done 	:= TRUE;
+				Execute := FALSE;
+				state := 0;
+			END_IF
+		
+		
+		
+		
+		
+		
+
+	END_CASE
+END_IF
+
+]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_RECIPEORDER" Id="{a75ebfd7-8f2a-4920-b37e-447a9ddce72a}">
+    <Declaration><![CDATA[TYPE DUT_RECIPEORDER :
+STRUCT
+	Pending: BOOL;
+	///corelating to the offered recipes#
+	RecipeID: INT;
+	///continious numbering
+	TaskID: INT;
+	Name : STRING[80];
+	Description	: STRING[255];
+	RecipeParameter: ARRAY [0..UserParameterCnt] OF DUT_RECIPE_USERPARAMETERINPUT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_WriteOfferlist" Id="{a63db676-974e-4bbd-897f-6f05be06fe18}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WriteOfferlist
+VAR_INPUT
+	WriteIdentifier: STRING[80];
+	NamespaceIndex: UINT;
+	ConnectionHdl: DWORD;
+	execute: BOOL;
+	WriteData:  ARRAY [0..OfferCnt] OF DUT_RECIPEOFFER;
+END_VAR
+VAR_OUTPUT
+	done: BOOL;
+	busy: BOOL;
+	error: BOOL;
+END_VAR
+VAR
+	/// FBs
+	fbWriteVariable: UA_Write;
+	fbNodeGetHandle: UA_NodeGetHandle;
+	/// Variables
+	state: INT := -1;
+	pWriteData: POINTER TO DUT_RECIPEOFFER;
+	VariableSize: UDINT;
+	NodeHdl: DWORD;
+	Timeout: TIME := DEFAULT_ADS_TIMEOUT;
+	SessionNodeID: ST_UANodeID;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF execute THEN
+	CASE state OF
+		
+		-1:	SessionNodeID.nNamespaceIndex    			:= Namespaceindex;
+			SessionNodeID.eIdentifierType				:= 1;
+			SessionNodeID.sIdentifier					:= WriteIdentifier;
+			VariableSize 								:= SIZEOF (WriteData);
+			pWriteData								:= ADR(WriteData);
+			
+			
+			done := FALSE;
+			state:=0;
+		
+	    0: fbNodeGetHandle(
+			Execute:=FALSE,
+			ConnectionHdl:=ConnectionHdl,
+			NodeID:=SessionNodeID,
+			Timeout:=Timeout,
+			NodeHdl=>NodeHdl,
+			Done=>,
+			Busy=>,
+			Error=>,
+			ErrorID=>,);
+			state:=1;
+			
+		1:fbNodeGetHandle(
+			Execute:=TRUE,
+			ConnectionHdl:=ConnectionHdl,
+			NodeID:=SessionNodeID,
+			Timeout:=Timeout,
+			NodeHdl=>NodeHdl,
+			Done=>,
+			Busy=>,
+			Error=>,
+			ErrorID=>,);
+			IF fbNodeGetHandle.Done THEN
+			state := 2;
+			END_IF
+			
+		
+				
+		2: fbWriteVariable(
+				Execute:=FALSE , 
+				ConnectionHdl:=ConnectionHdl , 
+				NodeHdl:=NodeHdl , 
+				stNodeAddInfo:= , 
+				pVariable:= pWriteData, 
+				cbData:= VariableSize, 
+				Timeout:=Timeout , 
+				Done=> , 
+				Busy=> , 
+				Error=> , 
+				ErrorID=> );
+				
+				state:=3;
+				
+		3: fbWriteVariable(
+				Execute:=TRUE , 
+				ConnectionHdl:=ConnectionHdl , 
+				NodeHdl:=NodeHdl , 
+				stNodeAddInfo:= , 
+				pVariable:= pWriteData, 
+				cbData:= VariableSize, 
+				Timeout:=Timeout , 
+				Done=> , 
+				Busy=> , 
+				Error=> , 
+				ErrorID=> );
+				IF fbWriteVariable.Done THEN
+					state		:= 2;
+					execute		:= FALSE;
+					done		:= TRUE;
+					busy		:= FALSE;
+				END_IF		
+	END_CASE
+ELSE
+	state := -1;
+END_IF ]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

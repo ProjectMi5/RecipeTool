@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="FB_ExecuteRecipe" Id="{195aae61-fa3e-4743-bbb1-082b527184cc}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ExecuteRecipe
+VAR_INPUT
+	Order			: 	DUT_RECIPEORDER;
+	Execute			: 	BOOL;
+	InitDone		: 	BOOL;
+END_VAR
+VAR_OUTPUT
+	Done	:	BOOL;
+	NotAvailable: BOOL;
+	RecipeInfo	: DUT_RECIPEOFFER;
+END_VAR
+VAR
+		BriefcaseConfig	: BOOL := TRUE;
+		i			: INT;
+		Recipe10001 : Recipe_10001_OneRound;
+		Recipe10010 : Recipe_10010_transportreserve;
+		
+		
+		//Recipe11020	: Recipe_11020_TequilaSunrise;
+		Recipe10000 : Recipe_10000_BlankRecipe;
+		//Recipe10013 : Recipe_10013_nSchichten;
+		//Recipe10014 : Recipe_10014_nSchichten4skills;
+		//Recipe20014	: Recipe_20014_chocoCookie;
+		Recipe10011: Recipe_10011_Skill1337;
+		//Recipe10012: Recipe_10012_Skill1337_1338_1339;
+		//Recipe10015: Recipe_10015_eineCookiebitte;
+		//Recipe10016: Recipe_10016_CookiemitTopping;
+		Recipe10017: Recipe_10017_DoubleCookiemitTopping;
+		//Recipe10018: Recipe_10018_TripleCookiemitTopping;
+		Recipe10019: Recipe_10019_DoubleCookieSimu;
+		//Recipe10050: Recipe_10050_PumpTest;
+		Recipe10051: Recipe_10051_FreePassion;
+		//Recipe10052: Recipe_10052_Orangenschorle;
+		Recipe10053: Recipe_10053_911Targa;
+		//Recipe10054: Recipe_10054_FreePassion_special;
+		Recipe10055: Recipe_10055_Summerday;
+		Recipe10056: Recipe_10056_ArcturianSunrise;
+		Recipe10057: Recipe_10057_GreenFive;
+		//Recipe10058: Recipe_10058_RedOne;
+		//Recipe10059: Recipe_10059_Pina_Batida_Lemon;
+		
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+
+
+IF Execute THEN
+	Done := FALSE;
+	NotAvailable := FALSE;
+	
+	CASE Order.RecipeID OF
+		
+		(*10000: Recipe10000 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10000.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10000(execute := FALSE);
+					
+					
+				END_IF
+		*)		
+		
+		10001: Recipe10001 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10001.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10001(execute := FALSE);
+										
+				END_IF	
+				
+		10010: Recipe10010 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10010.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10010(execute := FALSE);
+										
+				END_IF
+		10011: Recipe10011 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10011.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10011(execute := FALSE);
+										
+				END_IF
+				
+		(*10012: Recipe10012 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10012.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10012(execute := FALSE);
+										
+				END_IF
+		*)
+		(*
+10013: Recipe10013 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10013.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10013(execute := FALSE);
+										
+				END_IF
+				*)
+		(*10014: Recipe10014 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10014.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10014(execute := FALSE);
+										
+				END_IF*)
+		(*10015: Recipe10015 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10015.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10015(execute := FALSE);
+										
+				END_IF
+		*)
+		
+		(*
+		10016: Recipe10016 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10016.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10016(execute := FALSE);
+										
+				END_IF
+				*)
+				
+		10017: Recipe10017 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10017.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10017(execute := FALSE);
+										
+				END_IF	
+		(*10018: Recipe10018 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10018.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10018(execute := FALSE);
+										
+				END_IF		
+			*)	
+		10019: Recipe10019 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10019.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10019(execute := FALSE);
+										
+				END_IF
+		(*10050: Recipe10050 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10050.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10050(execute := FALSE);
+										
+				END_IF	*)
+		
+		10051: Recipe10051 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10051.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10051(execute := FALSE);
+										
+				END_IF	
+		
+		(*10052: Recipe10052 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10052.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10052(execute := FALSE);
+										
+				END_IF*)
+		
+		10053: Recipe10053 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10053.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10053(execute := FALSE);
+										
+				END_IF		
+				
+		(*10054: Recipe10054 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+				IF Recipe10054.RecipeDone THEN
+					Done := TRUE;
+					Execute := FALSE;
+					Recipe10054(execute := FALSE);
+										
+				END_IF			
+				*)
+		10055: 
+				IF NOT BriefcaseConfig THEN
+			   		Recipe10055 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+					IF Recipe10055.RecipeDone THEN
+						Done := TRUE;
+						Execute := FALSE;
+						Recipe10055(execute := FALSE);
+											
+					END_IF	
+				ELSE
+					Done := TRUE;
+					NotAvailable := TRUE;
+					Execute := FALSE;
+				END_IF		
+				
+		10056: IF NOT BriefcaseConfig THEN
+			   		Recipe10056 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+					IF Recipe10056.RecipeDone THEN
+						Done := TRUE;
+						Execute := FALSE;
+						Recipe10056(execute := FALSE);
+											
+					END_IF	
+				ELSE
+					Done := TRUE;
+					NotAvailable := TRUE;
+					Execute := FALSE;
+				END_IF	
+		
+				
+		10057: IF NOT BriefcaseConfig THEN
+			   		Recipe10057 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+					IF Recipe10057.RecipeDone THEN
+						Done := TRUE;
+						Execute := FALSE;
+						Recipe10057(execute := FALSE);
+											
+					END_IF	
+				ELSE
+					Done := TRUE;
+					NotAvailable := TRUE;
+					Execute := FALSE;
+				END_IF	
+		
+		
+		(*10059: IF NOT BriefcaseConfig THEN
+			   		Recipe10059 (Execute := InitDone,Order := order,RecipeInfo => RecipeInfo);
+				
+					IF Recipe10059.RecipeDone THEN
+						Done := TRUE;
+						Execute := FALSE;
+						Recipe10059(execute := FALSE);
+											
+					END_IF	
+				ELSE
+					Done := TRUE;
+					NotAvailable := TRUE;
+					Execute := FALSE;
+				END_IF
+				*)
+				
+				
+				
+				
+				
+				
+				
+		ELSE 
+				Done := TRUE;
+				NotAvailable := TRUE;
+				Execute := FALSE;				
+			
+	END_CASE
+	IF NOT InitDone THEN					
+						Done := TRUE;				
+						Execute := FALSE;
+					
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

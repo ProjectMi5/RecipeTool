@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_RECIPE_USERPARAMETERINPUT" Id="{106cbfc7-f514-476b-be23-3eb28c1078b5}">
+    <Declaration><![CDATA[TYPE DUT_RECIPE_USERPARAMETERINPUT :
+STRUCT
+	Value: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

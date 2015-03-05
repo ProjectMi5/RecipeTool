@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_PARAMETER" Id="{ba80ca61-9632-4d6d-9227-20d554e63545}">
+    <Declaration><![CDATA[TYPE DUT_PARAMETER :
+STRUCT
+	///Free to use = TRUE, busy to use =FALSE
+	Dummy: BOOL := TRUE;
+	///ID of the parameter
+	ID: UINT;
+	///Name of the parameter
+	Name: STRING(80);
+	///Unit of the parameter (mm,L,...)
+	Unit: STRING(80);
+	///Optional parameter
+	Required: BOOL;
+	///Default parameter to work
+	Default: LREAL;
+	///Minimum value of the parameter
+	MinValue: LREAL;
+	///Maximum value of the parameter
+	MaxValue: LREAL;
+	///Actual Value
+	Value: LREAL;
+	///StringValue
+	StringValue: STRING(80);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

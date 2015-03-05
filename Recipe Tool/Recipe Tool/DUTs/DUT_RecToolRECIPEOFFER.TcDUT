@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_RecToolRECIPEOFFER" Id="{71a7d30d-11dd-4a23-98ed-c93072e3afcd}">
+    <Declaration><![CDATA[TYPE DUT_RecToolRECIPEOFFER :
+STRUCT
+	Dummy:			BOOL := TRUE;
+	Name:			STRING[80]:= 'e.g. Product x';
+	RecipeID:		INT;
+	Description:	STRING[80]:= '%Description of the Recipe e.g. "a recipe, that produces a product with feature x"';
+	UserParameter:  DUT_RECIPE_USERPARAMETEROUTPUT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>

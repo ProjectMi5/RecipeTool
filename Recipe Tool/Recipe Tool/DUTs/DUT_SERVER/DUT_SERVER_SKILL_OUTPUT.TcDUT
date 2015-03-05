@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <DUT Name="DUT_SERVER_SKILL_OUTPUT" Id="{89749dcf-55e7-4fa6-ae7d-8be2020b849e}">
+    <Declaration><![CDATA[TYPE DUT_SERVER_SKILL_OUTPUT :
+STRUCT
+	///Free to use = TRUE, busy to use =FALSE
+	Dummy: BOOL := TRUE;
+	///Identification number of skill
+	ID: UINT;
+	///indentfication name of skill
+	Name: STRING[80];
+	///Skill activated
+	Activated: BOOL;
+	///Ready to do skill
+	Ready: BOOL;
+	///Skill in process
+	Busy: BOOL;
+	///Skill finish
+	Done: BOOL;
+	///Error in system
+	Error: BOOL;
+	///Range of parameters
+	ParameterOutput: DUT_SERVER_PARAMETEROUTPUTARRAY;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+    <ObjectProperties />
+  </DUT>
+</TcPlcObject>
