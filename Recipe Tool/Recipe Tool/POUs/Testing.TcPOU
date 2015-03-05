@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.25">
+  <POU Name="Testing" Id="{c0a179b8-0465-4c96-87cd-56dea6ed39a3}">
+    <Declaration><![CDATA[PROGRAM Testing
+VAR
+	
+	StartTestSequence: BOOL;
+	IterationCount	: UINT;
+	RecipeID		: INT := 10001;
+	
+	NoOPC			: BOOL;
+	state		: INT;
+	OrderCnt	: UINT := 9000;
+	
+	TempCounter	: UINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE state OF
+	
+
+	0: 
+		IF StartTestSequence AND NoOPC THEN
+			state := 1;
+		END_IF
+		
+	1:	
+		IF Tempcounter < IterationCount THEN
+			IF NOT Queue.Pending THEN
+				Queue.Pending 	:= TRUE;
+				Queue.RecipeID 	:= RecipeID;
+				Queue.TaskID 	:= OrderCnt;
+				Queue.Name		:= 'Testorder';
+				Tempcounter 	:= TempCounter +1;
+				OrderCnt 		:= OrderCnt +1;
+				
+			END_IF
+		ELSE
+			TempCounter 		:= 0;
+			state 				:= 0;
+			StartTestSequence 	:= FALSE;
+		END_IF
+		
+		
+	
+	
+END_CASE]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

@@ -26,6 +26,7 @@
 	
 	preasureheight				: LREAL := 30.0;
 	ClearTaskList				: BOOL;	
+	ClearManual					: BOOL;
 END_VAR]]></Declaration>
     <ObjectProperties />
   </GVL>

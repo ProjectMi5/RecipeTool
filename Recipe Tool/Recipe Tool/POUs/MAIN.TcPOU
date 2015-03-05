@@ -93,31 +93,49 @@ CASE state OF
 	
 	
 	 0:		// Waiting for new Order
-	 	fbReadQueue(
-					ReadIdentifier:= 'MI5.Order[0]', 
-					NamespaceIndex:= NamespaceIndex, 
-					ConnectionHdl:= ConnectionHdl, 
-					execute:= TRUE, 
-					ReadData=> Queue, 
-					done=> , 
-					busy=> , 
-					error=> );
-		IF fbReadQueue.done THEN
-			state := 1;
+	 	IF NOT Testing.NoOPC THEN
+	 		fbReadQueue(
+						ReadIdentifier:= 'MI5.Order[0]', 
+						NamespaceIndex:= NamespaceIndex, 
+						ConnectionHdl:= ConnectionHdl, 
+						execute:= TRUE, 
+						ReadData=> Queue, 
+						done=> , 
+						busy=> , 
+						error=> );
+			IF fbReadQueue.done THEN
+				state := 1;
+			END_IF
+		ELSE
+			state := 5;
 		END_IF
 		
-	1:	fbReadQueue(
-					ReadIdentifier:= 'MI5.Order[0]', 
-					NamespaceIndex:= NamespaceIndex, 
-					ConnectionHdl:= ConnectionHdl, 
-					execute:= TRUE, 
-					ReadData=> Queue, 
-					done=> , 
-					busy=> , 
-					error=> );
-		Trigger(CLK := fbReadQueue.done);
-		ToolTimeout(IN := NOT Trigger.Q);
-					
+	1:	
+		IF NOT Testing.NoOPC THEN
+				fbReadQueue(
+							ReadIdentifier:= 'MI5.Order[0]', 
+							NamespaceIndex:= NamespaceIndex, 
+							ConnectionHdl:= ConnectionHdl, 
+							execute:= TRUE, 
+							ReadData=> Queue, 
+							done=> , 
+							busy=> , 
+							error=> );
+				Trigger(CLK := fbReadQueue.done);
+				ToolTimeout(IN := NOT Trigger.Q);
+							
+				IF Queue.Pending THEN
+					state := 10;
+					TaskListPosition := TaskListPosition +1;
+						//Reset bei Overflow
+						IF TaskListPosition > 29 THEN
+							TaskListPosition := 0;
+						END_IF
+				END_IF		
+		ELSE
+			state := 5;
+		END_IF
+	 5:
 		IF Queue.Pending THEN
 			state := 10;
 			TaskListPosition := TaskListPosition +1;
@@ -125,8 +143,8 @@ CASE state OF
 				IF TaskListPosition > 29 THEN
 					TaskListPosition := 0;
 				END_IF
-		END_IF		
-
+		END_IF
+	 	
 	 
 	10: state := 20;
 		
@@ -174,18 +192,22 @@ CASE state OF
 
 	40:  // free Queue Slot
 		TempTask				:= EmptyTask;
-		
-		fbWriteQueue(
-			WriteIdentifier:= 'MI5.Order[0]', 
-			NamespaceIndex:= NamespaceIndex, 
-			ConnectionHdl:= ConnectionHdl, 
-			execute:= TRUE, 
-			WriteData:= , 
-			done=> , 
-			busy=> , 
-			error=> );
-		IF fbWriteQueue.done THEN
-		state := 0;
+		IF NOT Testing.NoOPC THEN
+			fbWriteQueue(
+				WriteIdentifier:= 'MI5.Order[0]', 
+				NamespaceIndex:= NamespaceIndex, 
+				ConnectionHdl:= ConnectionHdl, 
+				execute:= TRUE, 
+				WriteData:= , 
+				done=> , 
+				busy=> , 
+				error=> );
+			IF fbWriteQueue.done THEN
+			state := 0;
+			END_IF
+		ELSE
+			Queue.Pending := FALSE;
+			state := 0;
 		END_IF
 	
 	
@@ -266,9 +288,9 @@ fbReadReset(		ReadIdentifier:= 'MI5.ClearTaskList',
 				);
 
 					
-IF ClearTaskList THEN
+IF ClearTaskList OR ClearManual THEN
 	i := 0;
-	
+	ClearManual := FALSE;
 	Tasklistposition := -1;
 	fbWriteReset(	WriteIdentifier := 'MI5.ClearTaskList',
 					NamespaceIndex := NamespaceIndex, 

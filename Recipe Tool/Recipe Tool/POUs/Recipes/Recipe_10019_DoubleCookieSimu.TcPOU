@@ -4517,18 +4517,16 @@ StepDone := ExecuteSkill.Done;]]></ST>
         <ST><![CDATA[StepDone := FALSE;
 RecipeDone := FALSE; 
 //simulation ausgewählt?
-CASE LREAL_TO_INT (order.UserParameter[2].Value) OF
 
-1:
+
+
 ExecuteSkill.SkillID 		:= 1337;
 ExecuteSkill.SkillName	 	:= 'Testskill';
 
 ExecuteSkill();
 
 StepDone := ExecuteSkill.Done;
-ELSE StepDone := TRUE;
-
-END_CASE]]></ST>
+]]></ST>
       </Implementation>
     </Action>
     <Action Name="Completed_active" Id="{33828879-ba80-4db4-9b34-53eacaedc4f0}">
@@ -4754,18 +4752,13 @@ StepDone := ExecuteSkill.Done;]]></ST>
 
 //Skill auswählen
 
-CASE LREAL_TO_INT (order.UserParameter[2].Value) OF
-
-1:
 ExecuteSkill.SkillID 		:= 1316;
 ExecuteSkill.SkillName	 	:= 'Unblock';
 
 ExecuteSkill();
 
 StepDone := ExecuteSkill.Done;
-ELSE StepDone := TRUE;
-
-END_CASE]]></ST>
+]]></ST>
       </Implementation>
     </Action>
     <Action Name="Init_active" Id="{7bd39d8e-5316-4e90-836f-82b050adfa3b}">
@@ -4773,7 +4766,7 @@ END_CASE]]></ST>
         <ST><![CDATA[RecipeDone := FALSE;
 
 // Initialisation of Recipe Parameters an name etc
-RecipeInfo.Name := 'Double Cookie';
+RecipeInfo.Name := 'Double Cookie + Simulation';
 RecipeInfo.Description := 'Double Cookie with additional Simulation Step';
 RecipeInfo.Dummy := FALSE;
 RecipeInfo.RecipeID := 10019;	// 
@@ -4895,9 +4888,7 @@ StepDone := ExecuteSkill.Done;]]></ST>
 
 //Skill auswählen
 
-CASE LREAL_TO_INT (order.UserParameter[2].Value) OF
 
-1:
 //Skill auswählen
 ExecuteSkill.SkillID 		:= 1320;
 ExecuteSkill.SkillName	 	:= 'Transport';
@@ -4938,12 +4929,6 @@ ExecuteSkill.Parameter[5].Value := ;
 ExecuteSkill();
 
 StepDone := ExecuteSkill.Done;
-ELSE StepDone := TRUE;
-
-END_CASE
-
-
-
 
 
 ]]></ST>
@@ -5420,18 +5405,16 @@ StepDone := ExecuteSkill.Done;
 
 //Skill auswählen
 
-CASE LREAL_TO_INT (order.UserParameter[2].Value) OF
 
-1:
+
+
 ExecuteSkill.SkillID 		:= 1315;
 ExecuteSkill.SkillName	 	:= 'Block';
 
 ExecuteSkill();
 
 StepDone := ExecuteSkill.Done;
-ELSE StepDone := TRUE;
-
-END_CASE]]></ST>
+]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>
